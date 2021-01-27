@@ -84,6 +84,14 @@ int main(void) {
 		} /* end of devices traversal */
 	} /* end of platforms traversal */
 
+	cl_context_properties ctx_prop;
+	cl_context ctx = clCreateContext(ctx_prop, numdevices, devices, NULL, NULL, &err);
+
+	/* we chose device 1 - epiphany */
+	//cl_command_queue cmd_q0 = clCreateCommandQueue(ctx, devices[0], NULL, &err);
+	cl_command_queue cmd_q1 = clCreateCommandQueue(ctx, devices[1], NULL, &err);
+	
+	cl_mem a_mem_buff = clCreateBuffer(ctx, CL_MEM_READ_ONLY, LIST_SIZE * sizeof(int), NULL, &err);
 	/* clean */
 	free(devices);
 	free(platforms);
